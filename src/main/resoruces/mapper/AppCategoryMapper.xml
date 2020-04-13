@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kgc.dao.AppCategoryMapper">
+    <select id="getCategoryLevel1" resultType="AppCategory">
+        SELECT id,categoryName FROM app_category WHERE id IN (1,2)
+    </select>
+    <select id="getCategoryLevel2" resultType="AppCategory">
+        SELECT id,categoryName FROM app_category WHERE id BETWEEN 3 AND 28
+    </select>
+    <select id="getCategoryLevel3" resultType="AppCategory">
+        SELECT id,categoryName FROM app_category WHERE id BETWEEN 29 AND 50
+    </select>
+
+    <select id="getCategoryByParentId" resultType="AppCategory">
+      SELECT * FROM app_category
+      <where>
+          <if test="pid!=0 and pid!=''">
+              and parentId=#{pid}
+          </if>
+      </where>
+    </select>
+</mapper>
